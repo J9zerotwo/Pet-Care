@@ -1,15 +1,23 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Appointment
+from .auth import auth
 from . import db
 
 views = Blueprint('views', __name__)
 
 @views.route('/')
-@login_required
 def home():
     return render_template("home.html", user=current_user)
 
+@views.route('/auth/signup', methods=['GET','POST'])
+def signup():
+    return render_template('sign_up.html')
+
+@views.route('/auth/login', methods=['GET', 'POST'])
+def login():
+    return render_template('login.html', user=current_user)
+    
 @views.route('/appointment', methods=['GET', 'POST'])
 @login_required
 def appointment():
