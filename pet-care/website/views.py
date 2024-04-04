@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Appointment
+from datetime import datetime
 from . import db
 
 views = Blueprint('views', __name__)
@@ -20,6 +21,14 @@ def appointment():
         pet_color = request.form.get('pet_color')
         drop_off_date = request.form.get('drop_off_date')
         pick_up_date = request.form.get('pick_up_date')
+
+        # Convert string dates to datetime.date objects
+        try:
+            drop_off_date = datetime.strptime(drop_off_date, '%Y-%m-%d').date()
+            pick_up_date = datetime.strptime(pick_up_date, '%Y-%m-%d').date()
+        except ValueError:
+            flash('Invalid date format. Please use YYYY-MM-DD.', category='error')
+            return redirect('/appointment')
 
         if not pet_name or not pet_age or not pet_type or not pet_gender or not pet_color:
             flash('Please fill in all the fields', category='error')
