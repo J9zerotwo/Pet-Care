@@ -1,40 +1,100 @@
-<!-- templates/appointment.html -->
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Create an Appointment</h2>
-<form method="POST">
-    <label for="pet_name">Pet Name:</label>
-    <input type="text" id="pet_name" name="pet_name" required><br>
-    
-    <label for="pet_age">Pet Age:</label>
-    <input type="number" id="pet_age" name="pet_age" required><br>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
 
-    <label for="pet_type">Pet Type:</label>
-    <input type="text" id="pet_type" name="pet_type" required><br>
+    .container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
 
-    <label for="pet_gender">Pet Gender:</label>
-    <input type="text" id="pet_gender" name="pet_gender" required><br>
+    .form-container, .appointment-container {
+        width: 300px;
+        padding: 16px;
+        background-color: white;
+        margin: 50px;
+        border-radius: 4px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
 
-    <label for="pet_color">Pet Color:</label>
-    <input type="text" id="pet_color" name="pet_color" required><br>
+    .container h2 {
+        text-align: center;
+        color: #5b6572;
+    }
 
-    <label for="drop_off_date">Drop-off Date:</label>
-    <input type="date" id="drop_off_date" name="drop_off_date" required><br>
+    .container label {
+        color: #5b6572;
+    }
 
-    <label for="pick_up_date">Pick-up Date:</label>
-    <input type="date" id="pick_up_date" name="pick_up_date" required><br>
+    .container input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+    }
 
-    <button type="submit">Create Appointment</button>
-</form>
+    .container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-<h2>Your Appointments</h2>
-<ul>
-    {% for appointment in appointments %}
-    <li>
-        {{ appointment.pet_name }} - {{ appointment.drop_off_date.strftime('%Y-%m-%d') }} to {{ appointment.pick_up_date.strftime('%Y-%m-%d') }}
-        <!-- Add more details or actions (edit, delete) as needed -->
-    </li>
-    {% endfor %}
-</ul>
+    .container button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container">
+    <div class="form-container">
+        <h2>Create an Appointment</h2>
+        <form method="POST">
+            <label for="pet_name">Pet Name:</label>
+            <input type="text" id="pet_name" name="pet_name" required><br>
+
+            <label for="pet_age">Pet Age:</label>
+            <input type="number" id="pet_age" name="pet_age" required><br>
+
+            <label for="pet_type">Pet Type:</label>
+            <input type="text" id="pet_type" name="pet_type" required><br>
+
+            <label for="pet_gender">Pet Gender:</label>
+            <input type="text" id="pet_gender" name="pet_gender" required><br>
+
+            <label for="pet_color">Pet Color:</label>
+            <input type="text" id="pet_color" name="pet_color" required><br>
+
+            <label for="drop_off_date">Drop-off Date:</label>
+            <input type="date" id="drop_off_date" name="drop_off_date" required><br>
+
+            <label for="pick_up_date">Pick-up Date:</label>
+            <input type="date" id="pick_up_date" name="pick_up_date" required><br>
+
+            <button type="submit">Create Appointment</button>
+        </form>
+    </div>
+
+    <div class="appointment-container">
+        <h2>Your Appointments</h2>
+        <ul>
+            {% for appointment in appointments %}
+            <li>
+                {{ appointment.pet_name }} - {{ appointment.drop_off_date.strftime('%Y-%m-%d') }} to {{ appointment.pick_up_date.strftime('%Y-%m-%d') }}
+                <!-- Add more details or actions (edit, delete) as needed -->
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}
