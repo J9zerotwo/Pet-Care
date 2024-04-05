@@ -92,6 +92,9 @@
             <li>
                 {{ appointment.pet_name }} - {{ appointment.drop_off_date.strftime('%Y-%m-%d') }} to {{ appointment.pick_up_date.strftime('%Y-%m-%d') }}
                 <!-- Add more details or actions (edit, delete) as needed -->
+                <form method="POST" action="{{ url_for('views.cancel_appointment', id=appointment.id) }}">
+                    <button type="submit">Cancel</button>
+                </form>
             </li>
             {% endfor %}
         </ul>
